@@ -24,6 +24,6 @@ npm start
 This is link to deployed version
 
 ```
-[click here] http://ec2-3-16-215-112.us-east-2.compute.amazonaws.com
+[click here](http://ec2-3-16-215-112.us-east-2.compute.amazonaws.com)
 ```
 
