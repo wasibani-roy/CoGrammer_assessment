@@ -23,7 +23,7 @@ exports.create = (req, res) => {
   // Save Tutorial in the database
   Blog.create(blog)
     .then(data => {
-      res.send(data);
+      res.status(201).send(data);
     })
     .catch(err => {
       res.status(500).send({
@@ -71,10 +71,10 @@ exports.findOne = (req, res) => {
 // Update a Blog by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
-    const user = req.userId
-
+    const user = req.userId;
+    console.log(id);
     Blog.update(req.body, {
-      where: { id: id , user: user}
+      where: { id: id , userId: user}
     })
       .then(num => {
         if (num == 1) {
@@ -82,7 +82,7 @@ exports.update = (req, res) => {
             message: "Blog was updated successfully."
           });
         } else {
-          res.send({
+          res.status(400).send({
             message: `Cannot update Blog with id=${id}. Maybe Blog was not found or req.body is empty!`
           });
         }
@@ -97,9 +97,10 @@ exports.update = (req, res) => {
 // Delete a Blog with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
+    const user = req.userId
 
-    Tutorial.destroy({
-      where: { id: id }
+    Blog.destroy({
+      where: { id: id, userId: user }
     })
       .then(num => {
         if (num == 1) {

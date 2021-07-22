@@ -7,9 +7,7 @@ const db = require("./app/models");
 dotenv.config();
 const app = express();
 
-// db.sequelize.sync({force: true}).then(() => {
-//     console.log('Drop and Resync Db');
-//   });
+
 
 db.sequelize.sync();
 
@@ -27,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to CRUD application." });
 });
 
 // set port, listen for requests
@@ -35,6 +33,6 @@ app.get("/", (req, res) => {
 require('./app/routes/auth.routes')(app);
 require("./app/routes/blog.routes")(app);
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
+module.exports=app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
